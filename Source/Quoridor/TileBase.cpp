@@ -1,9 +1,9 @@
-#include "Tile.h"
+#include "TileBase.h"
 
-ATile::ATile(){
+ATileBase::ATileBase(){
     MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 }
 
-FBox ATile::GetBoundingBox()const{
+FBox ATileBase::GetBoundingBox()const{
     return MeshComponent->GetStaticMesh()->GetBoundingBox();
 }
