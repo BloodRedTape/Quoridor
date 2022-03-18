@@ -13,5 +13,6 @@ UCLASS()
 class QUORIDOR_API AQuoridorGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+public:
+	AQuoridorGameModeBase();
 };
