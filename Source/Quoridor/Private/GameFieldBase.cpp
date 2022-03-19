@@ -4,8 +4,8 @@ AGameFieldBase::AGameFieldBase(){
     Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 }
 
-void AGameFieldBase::PostInitProperties() {
-    Super::PostInitProperties();
+void AGameFieldBase::BeginPlay() {
+    Super::BeginPlay();
     
     if(!TileMesh)return;
 
@@ -15,12 +15,13 @@ void AGameFieldBase::PostInitProperties() {
 }
 
 void AGameFieldBase::PlaceBorder(int x, int y){
-    check(x < FieldSize - 1);
-    check(y < FieldSize - 1);
+    if(!(x < FieldSize - 1 && y < FieldSize - 1))return;
 
-    BorderMap[x][y] = true;
+    if(!BorderMap[x][y]){
+        BorderMap[x][y] = true;
 
-    SpawnBorder(x, y);
+        SpawnBorder(x, y);
+    }
 }
 
 void AGameFieldBase::SpawnBorder(int x, int y){

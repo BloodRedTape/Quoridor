@@ -24,11 +24,11 @@ private:
 public:
 	AGameFieldBase(); 
 	
-	void PostInitProperties()override;
+	void BeginPlay()override;
 
+	UFUNCTION(BlueprintCallable)
 	void PlaceBorder(int x, int y);
 private:
-	UFUNCTION(BlueprintCallable)
 	void SpawnBorder(int x, int y);
 
 	void SpawnTile(int x, int y);
