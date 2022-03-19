@@ -2,7 +2,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
-#include "TileBase.h"
 #include "GameFieldBase.generated.h"
 
 UCLASS()
@@ -15,8 +14,13 @@ private:
 
 	bool BorderMap[FieldSize - 1][FieldSize - 1] = {};
 
-	UPROPERTY(EditAnywhere, Category="Configuration")
-	TSubclassOf<ATileBase> TileClass;
+	UPROPERTY(EditDefaultsOnly, Category="Configuration")
+	UStaticMesh *TileMesh = nullptr;
+
+	//UPROPERTY(VisibleAnywhere)
+	USceneComponent *Root = nullptr;
 public:
-	void BeginPlay()override;
+	AGameFieldBase(); 
+	
+	void PostInitProperties()override;
 };
