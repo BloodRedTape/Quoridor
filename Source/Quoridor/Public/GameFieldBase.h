@@ -12,10 +12,12 @@ private:
 
 	bool TileMap[FieldSize][FieldSize] = {};
 
-	bool BorderMap[FieldSize - 1][FieldSize - 1] = {};
+	bool BorderMap[FieldSize][FieldSize] = {};
 
 	UPROPERTY(EditDefaultsOnly, Category="Configuration")
 	UStaticMesh *TileMesh = nullptr;
+	UPROPERTY(EditDefaultsOnly, Category="Configuration")
+	UStaticMesh *BorderMesh = nullptr;
 
 	//UPROPERTY(VisibleAnywhere)
 	USceneComponent *Root = nullptr;
@@ -23,4 +25,21 @@ public:
 	AGameFieldBase(); 
 	
 	void PostInitProperties()override;
+
+	void PlaceBorder(int x, int y);
+private:
+	UFUNCTION(BlueprintCallable)
+	void SpawnBorder(int x, int y);
+
+	void SpawnTile(int x, int y);
+
+	FVector2D GetTileSize(){
+		FBox Box = TileMesh->GetBoundingBox();
+    	return {Box.GetSize().X, Box.GetSize().Y};
+	}
+
+	FVector2D GetBorderSize(){
+		FBox Box = BorderMesh->GetBoundingBox();
+    	return {Box.GetSize().X, Box.GetSize().Y};
+	}
 };
